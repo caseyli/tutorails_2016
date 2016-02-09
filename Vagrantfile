@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "hashicorp/precise32"
-  config.vm.provision :shell, path: "tutorails_bootstrap.sh"
+  # config.vm.provision :shell, path: "tutorails_bootstrap.sh"
   # config.vm.network :forwarded_port, guest: 3000, host: 3000
 
   # Disable automatic box update checking. If you disable this, then
@@ -66,8 +66,26 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo apt-get update
-  #   sudo apt-get install -y apache2
-  # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    # basic support tools
+    sudo apt-get update
+    sudo apt-get install -y build-essential git curl libxslt1-dev libxml2-dev libssl-dev
+
+    # rvm
+    su - vagrant -c 'curl -sSL https://get.rvm.io | bash'
+    su - vagrant -c 'rvm rvmrc warning ignore allGemfiles'
+
+    # ruby
+    su - vagrant -c 'rvm install 2.2.1'
+
+    # rails
+    su - vagrant -c 'gem install rails -v 4.2 --no-doc'
+
+    # node
+    su - vagrant -c 'curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash'
+    echo "source /home/vagrant/.nvm/nvm.sh" >> /home/vagrant/.profile
+    source /home/vagrant/.profile
+    su - vagrant -c 'nvm install 4.2'
+    su - vagrant -c 'nvm alias default 4.2'
+  SHELL
 end
