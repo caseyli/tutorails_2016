@@ -14,7 +14,23 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "hashicorp/precise32"
   config.vm.provision :shell, path: "tutorails_bootstrap.sh"
-  # config.vm.network :forwarded_port, guest: 3000, host: 3000
+  config.vm.network :forwarded_port, guest: 3000, host: 3001
+
+  # Mac Specific Port Forarding
+  # config.trigger.after [:provision, :up, :reload] do
+  #       system('echo "
+  # rdr pass on lo0 inet proto tcp from any to 127.0.0.1 port 3000 -> 127.0.0.1 port 3001
+  # " | sudo pfctl -f - > /dev/null 2>&1; echo "==> Fowarding Ports: 3000 -> 3001"')  
+  #   end
+
+  # config.trigger.after [:halt, :destroy] do
+  #   system("sudo pfctl -df /etc/pf.conf > /dev/null 2>&1; echo '==> Removing Port Forwarding & Disabling pf'")
+  # end
+  
+  
+  
+  
+  
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
