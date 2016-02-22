@@ -7,7 +7,7 @@ su - vagrant -c 'curl -sSL https://get.rvm.io | bash'
 su - vagrant -c 'rvm rvmrc warning ignore allGemfiles'
 
 # ruby
-su - vagrant -c 'rvm install 2.2.1'
+su - vagrant -c 'rvm install 2.2.4'
 
 # rails
 su - vagrant -c 'gem install rails -v 4.2 --no-doc'
