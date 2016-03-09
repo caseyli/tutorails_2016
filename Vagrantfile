@@ -16,6 +16,9 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, path: "tutorails_bootstrap.sh"
   config.vm.network :forwarded_port, guest: 3000, host: 3000
 
+  # permission issues when mounting sync folder? Un comment this
+  # config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777","fmode=666"]
+
   # Mac Specific if Port Forarding is not working
   # Requires you install vagrant triggers
   # config.trigger.after [:provision, :up, :reload] do
