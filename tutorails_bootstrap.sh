@@ -7,14 +7,14 @@ su - vagrant -c 'curl -sSL https://get.rvm.io | bash'
 su - vagrant -c 'rvm rvmrc warning ignore allGemfiles'
 
 # ruby
-su - vagrant -c 'rvm install 2.2.4'
+su - vagrant -c 'rvm install 2.4.0'
 
 # rails
-su - vagrant -c 'gem install rails -v 4.2 --no-doc'
+su - vagrant -c 'gem install rails -v 5.0.1 --no-doc'
 
 # node
-su - vagrant -c 'curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash'
+su - vagrant -c 'curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash'
 echo "source /home/vagrant/.nvm/nvm.sh" >> /home/vagrant/.profile
 source /home/vagrant/.profile
-su - vagrant -c 'nvm install 4.2'
-su - vagrant -c 'nvm alias default 4.2'
+su - vagrant -c 'nvm install 7.5'
+su - vagrant -c 'nvm alias default 7.5'
